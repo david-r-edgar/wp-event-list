@@ -119,12 +119,21 @@ class EL_Db {
 		//title
 		if( !isset( $event_data['title'] ) || $event_data['title'] === '' ) { return false; }
 		$sqldata['title'] = stripslashes( $event_data['title'] );
-		//title_link
-		if( !isset( $event_data['title_link'] ) || $event_data['title_link'] === '' ) { return false; }
-		$sqldata['title_link'] = stripslashes( $event_data['title_link'] );
 		//title_link_type
 		if( !isset( $event_data['title_link_type'] ) || $event_data['title_link_type'] === '' ) { return false; }
 		$sqldata['title_link_type'] = stripslashes( $event_data['title_link_type'] );
+		//title_link
+		if ($event_data['title_link_type'] === 'custom') {
+			if( !isset( $event_data['title_link'] )
+					|| ($event_data['title_link'] === '')
+					|| (!$this->validate_url($event_data['title_link']))) {
+				$sqldata['title_link'] = '';
+			} else {
+				$sqldata['title_link'] = stripslashes( $event_data['title_link'] );
+			}
+		} else {
+			$sqldata['title_link'] = null;
+		}
 		//location
 		if( !isset( $event_data['location'] ) ) { $sqldata['location'] = ''; }
 		else { $sqldata['location'] = stripslashes ($event_data['location'] ); }
@@ -211,6 +220,12 @@ class EL_Db {
 			return $datestring;
 		}
 		return false;
+	}
+
+	private function validate_url($url) {
+		return (preg_match(
+				'#((https?|ftp)://(\S*?\.\S*?))([\s)\[\]{},;"\':<]|\.\s|$)#i',
+				$url));
 	}
 
 	private function get_sql_filter_string($date_filter=null, $cat_filter=null) {

@@ -207,7 +207,7 @@ class SC_Event_List {
 		$out .= '<div class="event-title"><h3>';
 		$title = $this->db->truncate(esc_attr($event->title), $a['title_length'], $this->single_event);
 		if($this->is_link_available($a, $event)) {
-			$out .= $this->get_event_link($a, $event->id, $title);
+			$out .= $this->get_event_link_custom($a, $event, $title);
 		}
 		else {
 			$out .= $title;
@@ -435,6 +435,15 @@ class SC_Event_List {
 		return '<a href="'.$this->get_event_url($a, $event_id).'">'.$title.'</a>';
 	}
 
+	private function get_event_link_custom(&$a, $event, $title) {
+		if ('custom' == $event->title_link_type) {
+			return '<a href="'.$event->title_link.'" target="_blank">'.$title.'</a>';
+		}
+		else {
+			return '<a href="'.$this->get_event_url($a, $event->id).'">'.$title.'</a>';
+		}
+	}
+
 	private function get_event_url(&$a, $event_id) {
 		return esc_html(add_query_arg('event_id'.$a['sc_id_for_url'], $event_id, $this->get_url($a)));
 	}
@@ -490,7 +499,7 @@ class SC_Event_List {
 	}
 
 	private function is_link_available(&$a, &$event) {
-		return $this->is_visible($a['link_to_event']) || ('events_with_details_only' == $a['link_to_event'] && !$this->single_event && '' != $event->details);
+		return  ('unlinked' != $event->title_link_type && ($this->is_visible($a['link_to_event']) || ('events_with_details_only' == $a['link_to_event'] && !$this->single_event && '' != $event->details)));
 	}
 
 	public function print_collapse_details_script() {

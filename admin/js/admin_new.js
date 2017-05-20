@@ -14,13 +14,13 @@ jQuery(document).ready(function($) {
 		$("#multiday").attr('checked', true);
 	}
 
-	// Show or hide event_link
-	//if ($("#start_date").val() == $("#_date").val()) {
-	//	$("#end_date_area").hide();
-	//}
-	//else {
-	//		$("#multiday").attr('checked', true);
-	//}
+	if ($('input[name=title_link_type]:checked').val() == "custom") {
+			$("#event_link_area").show();
+		}
+		else {
+			$("#title_link").val("");
+			$("#event_link_area").hide();
+		}
 
 	$.datepicker.setDefaults({
 		"dateFormat": conf.el_date_format,
@@ -73,18 +73,13 @@ jQuery(document).ready(function($) {
 
 
 	$('input[name=title_link_type]').click(function() {
-		console.log(this.value)
-		//var enddate = $("#start_date").datepicker("getDate");
 		if (this.value == "custom") {
-			//timestamp = enddate.getTime() + 1*24*60*60*1000;
-			//enddate.setTime(timestamp);
-			//$("#end_date").datepicker("option", "minDate", enddate);
 			$("#event_link_area").fadeIn();
 		}
 		else {
+			$("#title_link").val("");
 			$("#event_link_area").fadeOut();
 		}
-		//$("#end_date").datepicker("setDate", enddate);
 	});
 
 });
