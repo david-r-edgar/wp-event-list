@@ -34,3 +34,7 @@ span.date-wrapper input {
 	padding-right: 24px;
 	position: relative;
 }
+
+span.title_link_option {
+    margin-right: 2em;
+}

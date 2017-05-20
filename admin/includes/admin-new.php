@@ -107,6 +107,17 @@ class EL_Admin_New {
 						<td><input type="text" class="text form-required" name="title" id="title" value="'.str_replace('"', '&quot;', isset($event->title) ? $event->title : '').'" /></td>
 					</tr>
 					<tr>
+						<th><label>'.__('Title link','event-list').'</label></th>
+						<td>
+							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="default" /> '.__('Default','event-list').'</label></span>
+							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="unlinked" /> '.__('Unlinked','event-list').'</label></span>
+							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="custom" /> '.__('Custom','event-list').'</label></span>
+						</td>
+					</tr>
+					<tr id="event_link_area">
+						<th><label>'.__('Custom title link','event-list').'</label></th>
+						<td><input type="text" class="text form-required" name="title" id="title" value="'.str_replace('"', '&quot;', isset($event->link) ? $event->link : '').'" /></td>
+					<tr>
 						<th><label>'.__('Date','event-list').' ('.__('required','event-list').')</label></th>
 						<td><span class="date-wrapper"><input type="text" class="text form-required" name="start_date" id="start_date" value="'.date('Y-m-d', $start_date).'" /><i class="dashicons dashicons-calendar-alt"></i></span>
 							<span id="end_date_area"> - <span class="date-wrapper"><input type="text" class="text" name="end_date" id="end_date" value="'.date('Y-m-d', $end_date).'" /><i class="dashicons dashicons-calendar-alt"></i></span></span>

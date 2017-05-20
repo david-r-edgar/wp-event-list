@@ -14,6 +14,14 @@ jQuery(document).ready(function($) {
 		$("#multiday").attr('checked', true);
 	}
 
+	// Show or hide event_link
+	//if ($("#start_date").val() == $("#_date").val()) {
+	//	$("#end_date_area").hide();
+	//}
+	//else {
+	//		$("#multiday").attr('checked', true);
+	//}
+
 	$.datepicker.setDefaults({
 		"dateFormat": conf.el_date_format,
 		"firstDay": conf.el_start_of_week,
@@ -60,4 +68,23 @@ jQuery(document).ready(function($) {
 	// Initialize Dates
 	$("#start_date").datepicker("setDate", $.datepicker.parseDate('yy-mm-dd', $("#start_date").val()));
 	$("#end_date").datepicker("setDate", $.datepicker.parseDate('yy-mm-dd', $("#end_date").val()));
+
+
+
+
+	$('input[name=title_link_type]').click(function() {
+		console.log(this.value)
+		//var enddate = $("#start_date").datepicker("getDate");
+		if (this.value == "custom") {
+			//timestamp = enddate.getTime() + 1*24*60*60*1000;
+			//enddate.setTime(timestamp);
+			//$("#end_date").datepicker("option", "minDate", enddate);
+			$("#event_link_area").fadeIn();
+		}
+		else {
+			$("#event_link_area").fadeOut();
+		}
+		//$("#end_date").datepicker("setDate", enddate);
+	});
+
 });
