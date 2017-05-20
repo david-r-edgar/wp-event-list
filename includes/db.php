@@ -42,6 +42,8 @@ class EL_Db {
 				end_date date DEFAULT NULL,
 				time text,
 				title text NOT NULL,
+  				title_link_type enum(\'default\',\'unlinked\',\'custom\') DEFAULT NULL,
+  				title_link text,
 				location text,
 				details text,
 				categories text,
@@ -117,6 +119,12 @@ class EL_Db {
 		//title
 		if( !isset( $event_data['title'] ) || $event_data['title'] === '' ) { return false; }
 		$sqldata['title'] = stripslashes( $event_data['title'] );
+		//title_link
+		if( !isset( $event_data['title_link'] ) || $event_data['title_link'] === '' ) { return false; }
+		$sqldata['title_link'] = stripslashes( $event_data['title_link'] );
+		//title_link_type
+		if( !isset( $event_data['title_link_type'] ) || $event_data['title_link_type'] === '' ) { return false; }
+		$sqldata['title_link_type'] = stripslashes( $event_data['title_link_type'] );
 		//location
 		if( !isset( $event_data['location'] ) ) { $sqldata['location'] = ''; }
 		else { $sqldata['location'] = stripslashes ($event_data['location'] ); }

@@ -109,14 +109,14 @@ class EL_Admin_New {
 					<tr>
 						<th><label>'.__('Title link','event-list').'</label></th>
 						<td>
-							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="default" /> '.__('Default','event-list').'</label></span>
-							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="unlinked" /> '.__('Unlinked','event-list').'</label></span>
-							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="custom" /> '.__('Custom','event-list').'</label></span>
+							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="default" '.(!(isset($event->title_link_type)) || ($event->title_link_type == "default") ? "checked" : "").' /> '.__('Default','event-list').'</label></span>
+							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="unlinked" '. ((isset($event->title_link_type)) && ($event->title_link_type == "unlinked") ? "checked" : "").' /> '.__('Unlinked','event-list').'</label></span>
+							<span class="title_link_option"><label><input type="radio" name="title_link_type" value="custom" '. ((isset($event->title_link_type)) && ($event->title_link_type == "custom") ? "checked" : "").' /> '.__('Custom','event-list').'</label></span>
 						</td>
 					</tr>
 					<tr id="event_link_area">
 						<th><label>'.__('Custom title link','event-list').'</label></th>
-						<td><input type="text" class="text form-required" name="title" id="title" value="'.str_replace('"', '&quot;', isset($event->link) ? $event->link : '').'" /></td>
+						<td><input type="text" class="text form-required" name="title_link" id="title_link" value="'.str_replace('"', '&quot;', isset($event->title_link) ? $event->title_link : '').'" /></td>
 					<tr>
 						<th><label>'.__('Date','event-list').' ('.__('required','event-list').')</label></th>
 						<td><span class="date-wrapper"><input type="text" class="text form-required" name="start_date" id="start_date" value="'.date('Y-m-d', $start_date).'" /><i class="dashicons dashicons-calendar-alt"></i></span>
